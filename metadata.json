@@ -1,0 +1,6 @@
+{
+  "name": "Curator AI",
+  "description": "An Agentic AI Curator optimizing for human potential by aligning habits, identity, and curated growth media.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

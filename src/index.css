@@ -1,0 +1,246 @@
+@import "tailwindcss";
+
+@theme {
+  /* Cyber Moss Obsidian palette — inspired by organic mountain trails + hi-tech overlays */
+  --color-bg: #050a0d;
+  --color-panel: #0d1412;
+  --color-panel-raised: #131d1a;
+  --color-mist: #1b2824;
+  --color-blaze: #06b6d4; /* Glacier Cyan accent */
+  --color-blaze-dim: #0891b2;
+  --color-moss: #10b981; /* Cyber Moss Green */
+  --color-fog: #94a3b8; /* Sleek Slate Gray */
+  --color-parchment: #f8fafc; /* Pure Slate White */
+
+  --font-display: "Big Shoulders", sans-serif;
+  --font-hero: "Space Grotesk", "Plus Jakarta Sans", sans-serif;
+  --font-jakarta: "Plus Jakarta Sans", sans-serif;
+  --font-body: "Plus Jakarta Sans", "Work Sans", sans-serif;
+  --font-mono: "IBM Plex Mono", monospace;
+}
+
+@layer base {
+  html {
+    background-color: #050a0d;
+    color-scheme: dark;
+  }
+
+  body {
+    font-family: var(--font-body);
+    color: var(--color-parchment);
+    -webkit-font-smoothing: antialiased;
+    background-color: var(--color-bg);
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background-color: var(--color-blaze);
+    color: var(--color-bg);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-blaze);
+    outline-offset: 3px;
+  }
+}
+
+@layer utilities {
+  .font-display {
+    font-family: var(--font-display);
+  }
+  .font-mono-label {
+    font-family: var(--font-mono);
+  }
+
+  /* Theme-matched Obsidian Panels */
+  .trail-panel {
+    background-color: rgba(13, 20, 18, 0.65);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(16px);
+  }
+
+  .trail-panel-hover {
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .trail-panel-hover:hover {
+    border-color: rgba(6, 182, 212, 0.4);
+    background-color: rgba(19, 29, 26, 0.85);
+    transform: translateY(-2px);
+  }
+
+
+
+  /* Theme scrollbars */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-mist) transparent;
+  }
+}
+
+/* Scrollbars Chrome/Safari */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background-color: var(--color-mist);
+  border-radius: 9999px;
+  border: 2px solid var(--color-bg);
+  background-clip: padding-box;
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--color-blaze-dim);
+}
+
+/* Custom Cursor styles */
+.custom-cursor-ring {
+  pointer-events: none;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 9999;
+  border-radius: 9999px;
+  border: 1px solid rgba(6, 182, 212, 0.5);
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: monospace;
+  font-size: 9px;
+  font-weight: bold;
+  user-select: none;
+  color: var(--color-parchment);
+  will-change: transform, width, height, margin, border-color, background-color, box-shadow;
+  width: 24px;
+  height: 24px;
+  margin-top: -12px;
+  margin-left: -12px;
+  transition: width 0.18s ease-out, height 0.18s ease-out, margin 0.18s ease-out, border-color 0.18s, background-color 0.18s, box-shadow 0.18s, opacity 0.15s ease-in-out;
+  opacity: 1;
+}
+
+.custom-cursor-ring.hidden,
+.custom-cursor-dot.hidden {
+  opacity: 0;
+}
+
+.custom-cursor-ring.hovered {
+  width: 42px;
+  height: 42px;
+  margin-top: -21px;
+  margin-left: -21px;
+  border-color: var(--color-blaze);
+  background-color: rgba(6, 182, 212, 0.12);
+  box-shadow: 0 0 12px rgba(6, 182, 212, 0.35);
+}
+
+.custom-cursor-ring .hover-arrow {
+  display: none;
+  color: var(--color-blaze);
+  font-size: 11px;
+  line-height: 1;
+}
+
+.custom-cursor-ring.hovered .hover-arrow {
+  display: inline;
+  animation: pulse 1s infinite;
+}
+
+.custom-cursor-dot {
+  pointer-events: none;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 9999;
+  border-radius: 9999px;
+  background-color: var(--color-blaze);
+  will-change: transform;
+  width: 4px;
+  height: 4px;
+  margin-top: -2px;
+  margin-left: -2px;
+  transition: transform 0.12s ease-out, opacity 0.15s ease-in-out;
+  opacity: 1;
+}
+
+.custom-cursor-dot.hovered {
+  transform: scale(0) !important;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
+/* ReactBits Shiny Text Animation */
+@keyframes shiny-shine {
+  0% { background-position: 200% center; }
+  100% { background-position: -200% center; }
+}
+.animate-shiny-shine {
+  animation: shiny-shine 5s linear infinite;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleUp {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-scaleUp {
+  animation: scaleUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes hero-shimmer {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.animate-hero-shimmer {
+  background-size: 200% auto;
+  animation: hero-shimmer 6s ease infinite;
+}
+
+.font-hero {
+  font-family: var(--font-hero);
+}
+
+@keyframes cursorBlink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+@keyframes cursor-blink {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+
+.animate-cursor-blink {
+  animation: cursor-blink 1s step-end infinite;
+}
